@@ -1,0 +1,7 @@
+driver_name = "ThrottleStop"
+installation_path = 'C:\ProgramData'
+victim_processes = [
+    "notepad.exe",
+]
+continuous = false
+uninstall = true
