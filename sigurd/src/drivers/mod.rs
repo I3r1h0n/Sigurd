@@ -6,6 +6,8 @@ pub mod k7rkscan;
 pub mod throttlestop;
 #[cfg(feature = "bdapiutil64")]
 pub mod bdapiutil64;
+#[cfg(feature = "wsftprm")]
+pub mod wsftprm;
 #[cfg(feature = "ksapi64")]
 pub mod ksapi64;
 
@@ -67,6 +69,15 @@ pub fn get_drivers() -> Result<Vec<Box<dyn KillerDriver>>, SigurdError> {
 
         let bdapiutil64 = BdApiUtil64::new()?;
         driver_options.push(bdapiutil64);
+    }
+
+    // WSFTPrm (CVE-2023-52271)
+    #[cfg(feature = "wsftprm")]
+    {
+        use crate::drivers::wsftprm::WSFTPrm;
+
+        let wsftprm = WSFTPrm::new()?;
+        driver_options.push(wsftprm);
     }
 
     // KsAPI64 

@@ -38,6 +38,7 @@ This tool is made to be extended, and quicky implement new driver usage. For now
  - ThrottleStop.sys ([CVE-2025-7771](https://nvd.nist.gov/vuln/detail/CVE-2025-7771))
  - K7RKScan.sys ([CVE-2025-1055](https://nvd.nist.gov/vuln/detail/CVE-2025-1055))
  - BdApiUtil6.sys ([CVE-2024-51324](https://nvd.nist.gov/vuln/detail/CVE-2024-51324))
+ - wsftprm.sys ([LOL Drivers](https://www.loldrivers.io/drivers/30e8d598-2c60-49e4-953b-a6f620da1371/))
  - ksapi64.sys ([LOL Drivers](https://www.loldrivers.io/drivers/fb36ebc6-fdc5-42eb-929b-a07e00c5b9db/)) 
 
 You find some details and links to articles about used drivers in [Drivers](#drivers) section.
@@ -54,7 +55,7 @@ cd Sigurd/sigurd
 
 Now it all depends on what drivers you want to use. You can include only desired ones, by changing the set of cargo features. Below is an example build command, with basic set of drivers and no trace messages:
 ```shell
-cargo build --release --no-default-features --features "throttlestop bdapiutil64 k7rkscan"
+cargo build --release --no-default-features --features "throttlestop bdapiutil64 k7rkscan wsftprm"
 ```
 
 After build is finished, you can find binary in `/sigurd/target/release` folder.
@@ -139,6 +140,8 @@ I've decided to implement these drivers exploits for Sigurd:
  - k7rkscan
  - bdapiutil64
  - ksapi64
+
+And I also included `wsftprm` driver, since in wasn't presented at microsoft vulnerable driver blocklist at the time of writing. See the Northwave Cyber Security [research](https://northwave-cybersecurity.com/vulnerability-notice-topaz-antifraud) for details.
 
 They exploitation is kinda simple - just provide a driver with pid, using correct IOCTL code and they will call `ZwTerminateProcess` internally. You can read BlackSnufkin blog post on k7rkscan to get more info.
 

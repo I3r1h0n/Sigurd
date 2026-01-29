@@ -41,6 +41,7 @@ superfetch = "0.1.1"
 [features]
 default = [
     "trace", 
+    "wsftprm",
     "throttlestop", 
     "k7rkscan",
     "bdapiutil64"
@@ -50,3 +51,4 @@ bdapiutil64 = []
 k7rkscan = []
 throttlestop = []
 ksapi64 = []
+wsftprm = []
