@@ -1,4 +1,4 @@
-driver_name = "K7RKScan"
+driver_name = "GameDriverX64"
 installation_path = 'C:\ProgramData'
 victim_processes = [
     "notepad.exe",

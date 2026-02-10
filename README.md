@@ -26,22 +26,16 @@
 - [Building guide](#build)
 - [Working demo](#demo)
 - [Drivers](#drivers)
-    - [Throttle Stop](#throttle-stop)
-    - [Other driver](#other)
+    - [Implemented drivers](#implemented-drivers)
+    - [Details on Throttle Stop](#throttle-stop-details)
+    - [References](#references)
 - [Contribution guide](#contribution)
 - [Creds](#creds)
 
 ## Details
 BYOVD technique implies installing a vulnerable and signed driver on system, in order to exploit it's known vulnerability to gain privileges, read system secrets or (in our case) - kill processes. You can read more about it at [Microsoft Security Experts Blog](https://techcommunity.microsoft.com/blog/microsoftsecurityexperts/strategies-to-monitor-and-prevent-vulnerable-driver-attacks/4103985).
 
-This tool is made to be extended, and quicky implement new driver usage. For now it include these drivers:
- - ThrottleStop.sys ([CVE-2025-7771](https://nvd.nist.gov/vuln/detail/CVE-2025-7771))
- - K7RKScan.sys ([CVE-2025-1055](https://nvd.nist.gov/vuln/detail/CVE-2025-1055))
- - BdApiUtil6.sys ([CVE-2024-51324](https://nvd.nist.gov/vuln/detail/CVE-2024-51324))
- - wsftprm.sys ([LOL Drivers](https://www.loldrivers.io/drivers/30e8d598-2c60-49e4-953b-a6f620da1371/))
- - ksapi64.sys ([LOL Drivers](https://www.loldrivers.io/drivers/fb36ebc6-fdc5-42eb-929b-a07e00c5b9db/)) 
-
-You find some details and links to articles about used drivers in [Drivers](#drivers) section.
+To find some details and links to articles about used drivers, see [Drivers](#drivers) section.
 
 ## Build
 
@@ -101,51 +95,34 @@ Here is the demo showing it use the ThrottleStop.sys to kill notepad.exe and MsM
 
 ## Drivers
 
-### ThrottleStop
-Creation of this tool is highly inspired by [this research](https://securelist.com/av-killer-exploiting-throttlestop-sys/117026/) from Kaspersky. In this article, they described and AV Killing software, which uses the vulnerable ThrottleStop.sys to get arbitrary memory read and write, to patch one of the kernel functions and cause a process termination.
+### Implemented drivers
 
-To translate virtual memory addresses to physical, attackers used open source library [superfetch](https://github.com/jonomango/superfetch/tree/main). I thought it will be interesting to implement, and I created [my own rust crate](https://github.com/I3r1h0n/SuperFetch). See the repository readme and linked articles for details.
+Table of the currently implemented drivers.
 
-I've also run a little bit of a research, to find a function that will allow me to kill processes. And I stumbled across this call in NtTerminateProcess:
-<div align="center"><img width="500" src="assets/psp.png"></div><br>
+|Driver|Version|CVE|Details|Status|
+|------|-------|--------|-------|------|
+|GameDriverX64|7.23.4.7|[CVE-2025-61155](https://nvd.nist.gov/vuln/detail/CVE-2025-61155)|[Blog](https://vespalec.com/blog/tower-of-flaws/)|Non on LoL|
+|K7 driver|15.1.0.6|[CVE-2025-1055](https://nvd.nist.gov/vuln/detail/CVE-2025-1055)|[LolDrivers](https://www.loldrivers.io/drivers/9f88300d-e607-4e50-8626-fd799439e049/)|On LoL|
+|ThrottleStop|3.0.0.0|[CVE-2025-7771](https://nvd.nist.gov/vuln/detail/CVE-2025-7771)|[SecureList](https://securelist.com/av-killer-exploiting-throttlestop-sys/117026/)|Not on LoL|
+|BdApiUtil64|5.0.3.18797|[CVE-2024-51324](https://nvd.nist.gov/vuln/detail/CVE-2024-51324)|[LolDrivers](https://github.com/magicsword-io/LOLDrivers/issues/204)|On LoL|
+|WSFTPrm|2.0.0.0|[CVE-2023-52271](https://nvd.nist.gov/vuln/detail/CVE-2023-52271)|[LolDrivers](https://www.loldrivers.io/drivers/30e8d598-2c60-49e4-953b-a6f620da1371/)|Not on LoL?|
+|wamsdk|1.1.100|-|[Checkpoint](https://research.checkpoint.com/2025/silver-fox-apt-vulnerable-drivers/)|Blocked|
+|KsAPI64|1.0.591.131|-|-|Blocked|
 
-This function is also called from another location - PsTerminateProcess. `PsTerminateProcess` takes only two arguments - `PEPROCESS` and `NTSTATUS` (for process exit code):
-<div align="center"><img width="500" src="assets/ps.png"></div><br>
+<br>
 
-That's exactly what I needed. But the PsTerminateProcess isn't exported from ntoskrnl.exe. By following the cross references, I found this function:
-<div align="center"><img width="500" src="assets/whea.png"></div><br>
+See the Northwave Cyber Security [research](https://northwave-cybersecurity.com/vulnerability-notice-topaz-antifraud) for details on .
 
-It's exported by `ntoskrnl.exe`, and calls the PsTerminateProcess! This means that we can easily find the offset to the `WheaTerminateProcess`, and, using our read primitive - find the call instruction and calculate the address of `PsTerminateProcess`.
+You can find all driver files in `sigurd/drivers` folder.
 
-After this, our exploit logic becomes pretty straight forward:
-1. Obtain RW primitive
-2. Setup SuperFetch
-3. Get base address of `ntoskrnl`
-4. Get address of the function that we will patch
-5. Find address of `WheaTerminateProcess`
-6. Find system `_EPROCESS`
-7. Using read primitive - find address of `PsTerminateProcess`
-8. Iterate over ActiveProcessList and find target process
-9. Patch the target function to call the `PsTerminateProcess`
-10. Call the target function syscall wrapper from `ntdll.dll`
-11. Restore original target function stub
+I also didn't include the `ksapi64` and `wamsdk` driver to default features list, because it's been blocked by windows vulnerable driver block list.
 
-To see my implementation of this in rust, see the `/sigurd/src/driver/throttlestop/mod.rs` file.
+### ThrottleStop details
+ThrottleStop is a special case, since it's not so 'naive' BYOVD EDR Killer driver. It allow an arbitrary physical memory read/write, and because of that - exploiting it as a EDR killer is a little more complicated then just sending a correct struct in IOCTL request. See the [details](/details/ThrottleStop.md)
 
-### Others
+### References
 
-While performing my research on BYOVD, I came across [this](https://github.com/BlackSnufkin/BYOVD) project by [BlackSnufkin](https://github.com/BlackSnufkin), with a bunch of exploits for vulnerable drivers, performing a process termination by name. See see repo for more details.
-
-I've decided to implement these drivers exploits for Sigurd:
- - k7rkscan
- - bdapiutil64
- - ksapi64
-
-And I also included `wsftprm` driver, since in wasn't presented at microsoft vulnerable driver blocklist at the time of writing. See the Northwave Cyber Security [research](https://northwave-cybersecurity.com/vulnerability-notice-topaz-antifraud) for details.
-
-They exploitation is kinda simple - just provide a driver with pid, using correct IOCTL code and they will call `ZwTerminateProcess` internally. You can read BlackSnufkin blog post on k7rkscan to get more info.
-
-I also didn't include the `ksapi64` driver to default features list, because it's been blocked by windows vulnerable driver block list.
+Creation of Sigurd is higly inspired by [this](https://github.com/BlackSnufkin/BYOVD) project by [BlackSnufkin](https://github.com/BlackSnufkin). Also big thanks to Kaspersky for thair analyze on ThrottleStop.
 
 ## Contribution
 

@@ -8,6 +8,10 @@ pub mod throttlestop;
 pub mod bdapiutil64;
 #[cfg(feature = "wsftprm")]
 pub mod wsftprm;
+#[cfg(feature = "gamedriverx64")]
+pub mod gamedriverx64;
+#[cfg(feature = "wamsdk")]
+pub mod wamsdk;
 #[cfg(feature = "ksapi64")]
 pub mod ksapi64;
 
@@ -78,6 +82,24 @@ pub fn get_drivers() -> Result<Vec<Box<dyn KillerDriver>>, SigurdError> {
 
         let wsftprm = WSFTPrm::new()?;
         driver_options.push(wsftprm);
+    }
+
+    // GameDriverX64 (CVE-2025-61155)
+    #[cfg(feature = "gamedriverx64")]
+    {
+        use crate::drivers::gamedriverx64::GameDriverX64;
+
+        let gamedriverx64 = GameDriverX64::new()?;
+        driver_options.push(gamedriverx64);
+    }
+
+    // wamsdk
+    #[cfg(feature = "wamsdk")]
+    {
+        use crate::drivers::wamsdk::Wamsdk;
+
+        let wamsdk = Wamsdk::new()?;
+        driver_options.push(wamsdk);
     }
 
     // KsAPI64 

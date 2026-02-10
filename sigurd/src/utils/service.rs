@@ -1,7 +1,7 @@
 use std::time::Duration;
 use std::{mem, thread};
 use std::ptr::null_mut;
-use winapi::um::winsvc::{DeleteService, SC_MANAGER_ALL_ACCESS, SC_MANAGER_CREATE_SERVICE, SERVICE_STOP};
+use winapi::um::winsvc::{DeleteService, SC_MANAGER_ALL_ACCESS, SERVICE_START, SERVICE_STOP};
 use winapi::um::{
     winnt::{SERVICE_AUTO_START, SERVICE_ERROR_NORMAL, SERVICE_KERNEL_DRIVER}, 
     winsvc::{
@@ -85,12 +85,12 @@ pub fn sc_create(driver_name: &str, driver_path: &str) -> Result<bool, SigurdErr
         // Will remain true if service was created by us
         let mut created = true;
 
-        let sc_manager = OpenSCManagerW(null_mut(), null_mut(), SC_MANAGER_CREATE_SERVICE);
+        let sc_manager = OpenSCManagerW(null_mut(), null_mut(), SC_MANAGER_ALL_ACCESS);
         if sc_manager.is_null() { 
             return Err(SigurdError::last("Can't get sc manager"));
         }
 
-        let mut service = OpenServiceW(sc_manager, to_wstring(driver_name).as_ptr(), SERVICE_QUERY_STATUS);
+        let mut service = OpenServiceW(sc_manager, to_wstring(driver_name).as_ptr(), SERVICE_QUERY_STATUS | SERVICE_START);
         service = if service.is_null() {
             CreateServiceW(
                 sc_manager, 
