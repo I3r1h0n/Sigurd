@@ -105,13 +105,11 @@ Table of the currently implemented drivers.
 |K7 driver|15.1.0.6|[CVE-2025-1055](https://nvd.nist.gov/vuln/detail/CVE-2025-1055)|[LolDrivers](https://www.loldrivers.io/drivers/9f88300d-e607-4e50-8626-fd799439e049/)|On LoL|
 |ThrottleStop|3.0.0.0|[CVE-2025-7771](https://nvd.nist.gov/vuln/detail/CVE-2025-7771)|[SecureList](https://securelist.com/av-killer-exploiting-throttlestop-sys/117026/)|Not on LoL|
 |BdApiUtil64|5.0.3.18797|[CVE-2024-51324](https://nvd.nist.gov/vuln/detail/CVE-2024-51324)|[LolDrivers](https://github.com/magicsword-io/LOLDrivers/issues/204)|On LoL|
-|WSFTPrm|2.0.0.0|[CVE-2023-52271](https://nvd.nist.gov/vuln/detail/CVE-2023-52271)|[LolDrivers](https://www.loldrivers.io/drivers/30e8d598-2c60-49e4-953b-a6f620da1371/)|Not on LoL?|
+|WSFTPrm|2.0.0.0|[CVE-2023-52271](https://nvd.nist.gov/vuln/detail/CVE-2023-52271)|[research](https://northwave-cybersecurity.com/vulnerability-notice-topaz-antifraud)|Not on LoL?|
 |wamsdk|1.1.100|-|[Checkpoint](https://research.checkpoint.com/2025/silver-fox-apt-vulnerable-drivers/)|Blocked|
 |KsAPI64|1.0.591.131|-|-|Blocked|
 
 <br>
-
-See the Northwave Cyber Security [research](https://northwave-cybersecurity.com/vulnerability-notice-topaz-antifraud) for details on .
 
 You can find all driver files in `sigurd/drivers` folder.
 
