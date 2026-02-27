@@ -6,6 +6,8 @@ pub mod k7rkscan;
 pub mod throttlestop;
 #[cfg(feature = "bdapiutil64")]
 pub mod bdapiutil64;
+#[cfg(feature = "eb")]
+pub mod eb;
 #[cfg(feature = "wsftprm")]
 pub mod wsftprm;
 #[cfg(feature = "gamedriverx64")]
@@ -91,6 +93,14 @@ pub fn get_drivers() -> Result<Vec<Box<dyn KillerDriver>>, SigurdError> {
 
         let gamedriverx64 = GameDriverX64::new()?;
         driver_options.push(gamedriverx64);
+    }
+
+    // UnknownDriver (eb.sys)
+    #[cfg(feature = "eb")]
+    {
+        use crate::drivers::eb::UnknownDriver;
+        let unknowndriver = UnknownDriver::new()?;
+        driver_options.push(unknowndriver);
     }
 
     // wamsdk

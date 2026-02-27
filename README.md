@@ -102,6 +102,7 @@ Table of the currently implemented drivers.
 |Driver|Version|CVE|Details|Status|
 |------|-------|--------|-------|------|
 |GameDriverX64|7.23.4.7|[CVE-2025-61155](https://nvd.nist.gov/vuln/detail/CVE-2025-61155)|[Blog](https://vespalec.com/blog/tower-of-flaws/)|Non on LoL|
+|eb.sys|0.0.1 |- |[Github](https://github.com/j3h4ck/UnknownKiller)| Not on LoL |
 |K7 driver|15.1.0.6|[CVE-2025-1055](https://nvd.nist.gov/vuln/detail/CVE-2025-1055)|[LolDrivers](https://www.loldrivers.io/drivers/9f88300d-e607-4e50-8626-fd799439e049/)|On LoL|
 |ThrottleStop|3.0.0.0|[CVE-2025-7771](https://nvd.nist.gov/vuln/detail/CVE-2025-7771)|[SecureList](https://securelist.com/av-killer-exploiting-throttlestop-sys/117026/)|Not on LoL|
 |BdApiUtil64|5.0.3.18797|[CVE-2024-51324](https://nvd.nist.gov/vuln/detail/CVE-2024-51324)|[LolDrivers](https://github.com/magicsword-io/LOLDrivers/issues/204)|On LoL|
@@ -112,6 +113,8 @@ Table of the currently implemented drivers.
 <br>
 
 You can find all driver files in `sigurd/drivers` folder.
+
+The most recently added driver is `eb.sys`. I found out about this vulnerable driver from [j3h4ck github](https://github.com/j3h4ck/UnknownKiller), go see the repo. I don't know where this driver actially came from, but it is signed by Microsoft WHCP and is still not on driver block list.
 
 I also didn't include the `ksapi64` and `wamsdk` driver to default features list, because it's been blocked by windows vulnerable driver block list.
 
