@@ -1,4 +1,5 @@
 use std::{mem, ptr::null_mut};
+use include_packed::include_packed;
 
 use winapi::{
     ctypes::c_void, shared::minwindef::{DWORD, LPVOID, MAX_PATH, FALSE}, um::{
@@ -21,8 +22,6 @@ const VERSION: &str = "0.0.1";
 
 const DRIVER_DEVICE: &str = "\\\\.\\HtAntiCheatDriver";
 const IOCTL_KILL: u32 = 0x222040;
-
-static DRIVER: &'static [u8] = include_bytes!("../../../drivers/GameDriverX64.sys");
 
 #[repr(C, packed)]
 struct payload {
@@ -148,7 +147,7 @@ impl KillerDriver for GameDriverX64 {
     }
 
     fn get_file(&self) -> Result<Vec<u8>, crate::utils::error::SigurdError> {
-        let v = DRIVER.to_vec();
+        let v = include_packed!("drivers/GameDriverX64.sys");
         return Ok(v);
     }
 

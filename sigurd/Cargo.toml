@@ -1,6 +1,6 @@
 [package]
 name = "sigurd"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 authors = ["I3r1h0n"]
 description = "BYOVD technique abuse tool"
@@ -12,6 +12,7 @@ codegen-units = 1
 strip = true      
 
 [dependencies]
+include_packed = "0.1.6"
 chrono = "0.4"
 console = "0.16.2"
 crossterm = "0.29.0"
@@ -39,6 +40,9 @@ winapi = { version = "0.3.9", features = [
 ctrlc = "3.5.1"
 ntapi = "0.4.2"
 superfetch = "0.1.1"
+
+[build-dependencies]
+include_packed = { version = "0.1.6", features = ["build"] }
 
 [features]
 default = [

