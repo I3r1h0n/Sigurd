@@ -103,6 +103,7 @@ Table of the currently implemented drivers.
 |------|-------|--------|-------|------|
 |GameDriverX64|7.23.4.7|[CVE-2025-61155](https://nvd.nist.gov/vuln/detail/CVE-2025-61155)|[Blog](https://vespalec.com/blog/tower-of-flaws/)|Non on LoL|
 |eb.sys|0.0.1 |- |[Github](https://github.com/j3h4ck/UnknownKiller)| Not on LoL |
+|CcProtect.sys|1.3.2.1|-|[Github](https://github.com/BlackSnufkin/BYOVD/tree/main/CcProtect-Killer)|Not on LoL
 |K7 driver|15.1.0.6|[CVE-2025-1055](https://nvd.nist.gov/vuln/detail/CVE-2025-1055)|[LolDrivers](https://www.loldrivers.io/drivers/9f88300d-e607-4e50-8626-fd799439e049/)|On LoL|
 |ThrottleStop|3.0.0.0|[CVE-2025-7771](https://nvd.nist.gov/vuln/detail/CVE-2025-7771)|[SecureList](https://securelist.com/av-killer-exploiting-throttlestop-sys/117026/)|Not on LoL|
 |BdApiUtil64|5.0.3.18797|[CVE-2024-51324](https://nvd.nist.gov/vuln/detail/CVE-2024-51324)|[LolDrivers](https://github.com/magicsword-io/LOLDrivers/issues/204)|On LoL|

@@ -12,6 +12,8 @@ pub mod eb;
 pub mod wsftprm;
 #[cfg(feature = "gamedriverx64")]
 pub mod gamedriverx64;
+#[cfg(feature = "ccprotect")]
+pub mod ccprotect;
 #[cfg(feature = "wamsdk")]
 pub mod wamsdk;
 #[cfg(feature = "ksapi64")]
@@ -101,6 +103,14 @@ pub fn get_drivers() -> Result<Vec<Box<dyn KillerDriver>>, SigurdError> {
         use crate::drivers::eb::UnknownDriver;
         let unknowndriver = UnknownDriver::new()?;
         driver_options.push(unknowndriver);
+    }
+
+    // CcProtect (CcProtect.sys)
+    #[cfg(feature = "ccprotect")]
+    {
+        use crate::drivers::ccprotect::CcProtect;
+        let ccprotect = CcProtect::new()?;
+        driver_options.push(ccprotect);
     }
 
     // wamsdk
