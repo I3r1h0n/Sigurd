@@ -12,6 +12,8 @@ pub mod eb;
 pub mod wsftprm;
 #[cfg(feature = "gamedriverx64")]
 pub mod gamedriverx64;
+#[cfg(feature = "stprocessmonitor")]
+pub mod stprocessmonitor;
 #[cfg(feature = "ccprotect")]
 pub mod ccprotect;
 #[cfg(feature = "wamsdk")]
@@ -103,6 +105,14 @@ pub fn get_drivers() -> Result<Vec<Box<dyn KillerDriver>>, SigurdError> {
         use crate::drivers::eb::UnknownDriver;
         let unknowndriver = UnknownDriver::new()?;
         driver_options.push(unknowndriver);
+    }
+
+    // STProcessMonitor (CVE-2026-0828)
+    #[cfg(feature = "stprocessmonitor")]
+    {
+        use crate::drivers::stprocessmonitor::STProcessMonitor;
+        let stprocessmonitor = STProcessMonitor::new()?;
+        driver_options.push(stprocessmonitor);
     }
 
     // CcProtect (CcProtect.sys)

@@ -1,6 +1,6 @@
 [package]
 name = "sigurd"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 authors = ["I3r1h0n"]
 description = "BYOVD technique abuse tool"
@@ -46,13 +46,11 @@ include_packed = { version = "0.1.6", features = ["build"] }
 
 [features]
 default = [
-    "trace", 
-    "eb",
+    "stprocessmonitor", 
+    "gamedriverx64",
+    "ccprotect",
     "wsftprm",
-    "throttlestop", 
-    "k7rkscan",
-    "bdapiutil64",
-    "gamedriverx64"
+    "throttlestop"
 ]
 eb = []
 gamedriverx64 = []
@@ -64,3 +62,4 @@ throttlestop = []
 ksapi64 = []
 wsftprm = []
 wamsdk = []
+stprocessmonitor = []

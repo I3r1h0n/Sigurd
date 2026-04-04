@@ -101,6 +101,7 @@ Table of the currently implemented drivers.
 
 |Driver|Version|CVE|Details|Status|
 |------|-------|--------|-------|------|
+|STProcessMonitor|11.11.4|[CVE-2026-0828](https://www.cve.org/CVERecord?id=CVE-2026-0828)|[Public post](https://kb.cert.org/vuls/id/818729)|Not on LoL|
 |GameDriverX64|7.23.4.7|[CVE-2025-61155](https://nvd.nist.gov/vuln/detail/CVE-2025-61155)|[Blog](https://vespalec.com/blog/tower-of-flaws/)|Non on LoL|
 |eb.sys|0.0.1 |- |[Github](https://github.com/j3h4ck/UnknownKiller)| Not on LoL |
 |CcProtect.sys|1.3.2.1|-|[Github](https://github.com/BlackSnufkin/BYOVD/tree/main/CcProtect-Killer)|Not on LoL
