@@ -37,6 +37,9 @@ BYOVD technique implies installing a vulnerable and signed driver on system, in 
 
 To find some details and links to articles about used drivers, see [Drivers](#drivers) section.
 
+## Getting Sigurd
+You can download stable release binary from [Github Release](https://github.com/I3r1h0n/Sigurd/releases) page. It includes only default drivers and no trace output (see the list of driver in release text).
+
 ## Build
 
 All you need is lastest rust tool chain on you Windows machine (_or on any other machine, in case you know what are you doing_). You can find the standalone installers [here](https://forge.rust-lang.org/infra/other-installation-methods.html#standalone-installers). 
