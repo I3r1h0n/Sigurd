@@ -14,6 +14,8 @@ pub mod wsftprm;
 pub mod gamedriverx64;
 #[cfg(feature = "stprocessmonitor")]
 pub mod stprocessmonitor;
+#[cfg(feature = "poisonx")]
+pub mod poisonx;
 #[cfg(feature = "ccprotect")]
 pub mod ccprotect;
 #[cfg(feature = "wamsdk")]
@@ -88,6 +90,15 @@ pub fn get_drivers() -> Result<Vec<Box<dyn KillerDriver>>, SigurdError> {
 
         let wsftprm = WSFTPrm::new()?;
         driver_options.push(wsftprm);
+    }
+
+    // PoisonX
+    #[cfg(feature = "poisonx")]
+    {
+        use crate::drivers::poisonx::PoisonX;
+
+        let poisonx = PoisonX::new()?;
+        driver_options.push(poisonx);
     }
 
     // GameDriverX64 (CVE-2025-61155)

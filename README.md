@@ -7,7 +7,7 @@
 
 <div align="center">
 <img alt="Rust" src="https://img.shields.io/badge/rust-f04041?style=for-the-badge&labelColor=c0282d&logo=rust">
-<img alt="Version" src="https://img.shields.io/badge/version-v0.1.0-green?style=for-the-badge">
+<img alt="Version" src="https://img.shields.io/badge/version-v0.1.3-green?style=for-the-badge">
 <img alt="Lic" src="https://img.shields.io/github/license/I3r1h0n/Sigurd?label=license&style=for-the-badge">
 </div>
 </div>
@@ -104,6 +104,7 @@ Table of the currently implemented drivers.
 
 |Driver|Version|CVE|Details|Status|
 |------|-------|--------|-------|------|
+|PoisonX|0.0.1|-|[Discoverer](https://medium.com/@jehadbudagga/reverse-engineering-a-0day-used-against-crowdstrike-edr-a5ea1fbe3fd4)|Not on LoL|
 |STProcessMonitor|11.11.4|[CVE-2026-0828](https://www.cve.org/CVERecord?id=CVE-2026-0828)|[Public post](https://kb.cert.org/vuls/id/818729)|Not on LoL|
 |GameDriverX64|7.23.4.7|[CVE-2025-61155](https://nvd.nist.gov/vuln/detail/CVE-2025-61155)|[Blog](https://vespalec.com/blog/tower-of-flaws/)|Non on LoL|
 |eb.sys|0.0.1 |- |[Github](https://github.com/j3h4ck/UnknownKiller)| Not on LoL |
@@ -119,7 +120,7 @@ Table of the currently implemented drivers.
 
 You can find all driver files in `sigurd/drivers` folder.
 
-The most recently added driver is `eb.sys`. I found out about this vulnerable driver from [j3h4ck github](https://github.com/j3h4ck/UnknownKiller), go see the repo. I don't know where this driver actially came from, but it is signed by Microsoft WHCP and is still not on driver block list.
+See the original [PoisonKiller](https://github.com/j3h4ck/PoisonKiller) repo by j3h4ck.
 
 I also didn't include the `ksapi64` and `wamsdk` driver to default features list, because it's been blocked by windows vulnerable driver block list.
 
