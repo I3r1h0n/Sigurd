@@ -14,6 +14,8 @@ pub mod wsftprm;
 pub mod gamedriverx64;
 #[cfg(feature = "stprocessmonitor")]
 pub mod stprocessmonitor;
+#[cfg(feature = "phantom")]
+pub mod phantom;
 #[cfg(feature = "poisonx")]
 pub mod poisonx;
 #[cfg(feature = "ccprotect")]
@@ -108,6 +110,15 @@ pub fn get_drivers() -> Result<Vec<Box<dyn KillerDriver>>, SigurdError> {
 
         let gamedriverx64 = GameDriverX64::new()?;
         driver_options.push(gamedriverx64);
+    }
+
+    // Phantom Killer
+    #[cfg(feature = "phantom")]
+    {
+        use crate::drivers::phantom::PhantomKiller;
+
+        let phantom = PhantomKiller::new()?;
+        driver_options.push(phantom);
     }
 
     // UnknownDriver (eb.sys)
