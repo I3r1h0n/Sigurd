@@ -121,7 +121,7 @@ Table of the currently implemented drivers.
 
 You can find all driver files in `sigurd/drivers` folder.
 
-See the original [PoisonKiller](https://github.com/j3h4ck/PoisonKiller) repo by j3h4ck, and [PhantomKiller](https://github.com/redteamfortress/PhantomKiller) by redteamfortress.
+See the original [PhantomKiller](https://github.com/redteamfortress/PhantomKiller) by j3h4ck.
 
 I also didn't include the `ksapi64` and `wamsdk` driver to default features list, because it's been blocked by windows vulnerable driver block list.
 
