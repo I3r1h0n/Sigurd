@@ -7,7 +7,7 @@
 
 <div align="center">
 <img alt="Rust" src="https://img.shields.io/badge/rust-f04041?style=for-the-badge&labelColor=c0282d&logo=rust">
-<img alt="Version" src="https://img.shields.io/badge/version-v0.1.4-green?style=for-the-badge">
+<img alt="Version" src="https://img.shields.io/badge/version-v0.1.5-green?style=for-the-badge">
 <img alt="Lic" src="https://img.shields.io/github/license/I3r1h0n/Sigurd?label=license&style=for-the-badge">
 </div>
 </div>
