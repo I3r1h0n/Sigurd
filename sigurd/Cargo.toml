@@ -52,7 +52,8 @@ default = [
     "gamedriverx64",
     "ccprotect",
     "wsftprm",
-    "throttlestop"
+    "throttlestop",
+    "ardrv"
 ]
 phantom = []
 poisonx = []
@@ -67,3 +68,4 @@ ksapi64 = []
 wsftprm = []
 wamsdk = []
 stprocessmonitor = []
+ardrv = []

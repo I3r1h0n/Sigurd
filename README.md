@@ -105,11 +105,12 @@ Table of the currently implemented drivers.
 |Driver|Version|CVE|Details|Status|
 |------|-------|--------|-------|------|
 |PhantomKiller|2.5.30.11281|-|[Article](https://medium.com/@jehadbudagga/phantom-killer-reverse-engineering-and-weaponizing-a-lenovo-driver-to-terminate-edr-processes-9191cd06374f)| Not on LoL |
+|AppRemover Driver|v2017.10.02.1551|[CVE-2026-36425](https://www.cve.org/CVERecord?id=CVE-2026-36425)|[Github](https://github.com/redteamfortress/CVE-2026-36425)|Not on LoL|
 |PoisonX|0.0.1|-|[Discoverer](https://medium.com/@jehadbudagga/reverse-engineering-a-0day-used-against-crowdstrike-edr-a5ea1fbe3fd4)|Not on LoL|
 |STProcessMonitor|11.11.4|[CVE-2026-0828](https://www.cve.org/CVERecord?id=CVE-2026-0828)|[Public post](https://kb.cert.org/vuls/id/818729)|Not on LoL|
 |GameDriverX64|7.23.4.7|[CVE-2025-61155](https://nvd.nist.gov/vuln/detail/CVE-2025-61155)|[Blog](https://vespalec.com/blog/tower-of-flaws/)|Non on LoL|
 |eb.sys|0.0.1 |- |[Github](https://github.com/j3h4ck/UnknownKiller)| Not on LoL |
-|CcProtect.sys|1.3.2.1|-|[Github](https://github.com/BlackSnufkin/BYOVD/tree/main/CcProtect-Killer)|Not on LoL
+|CcProtect.sys|1.3.2.1|-|[Github](https://github.com/BlackSnufkin/BYOVD/tree/main/CcProtect-Killer)|Not on LoL|
 |K7 driver|15.1.0.6|[CVE-2025-1055](https://nvd.nist.gov/vuln/detail/CVE-2025-1055)|[LolDrivers](https://www.loldrivers.io/drivers/9f88300d-e607-4e50-8626-fd799439e049/)|On LoL|
 |ThrottleStop|3.0.0.0|[CVE-2025-7771](https://nvd.nist.gov/vuln/detail/CVE-2025-7771)|[SecureList](https://securelist.com/av-killer-exploiting-throttlestop-sys/117026/)|Not on LoL|
 |BdApiUtil64|5.0.3.18797|[CVE-2024-51324](https://nvd.nist.gov/vuln/detail/CVE-2024-51324)|[LolDrivers](https://github.com/magicsword-io/LOLDrivers/issues/204)|On LoL|
@@ -121,7 +122,7 @@ Table of the currently implemented drivers.
 
 You can find all driver files in `sigurd/drivers` folder.
 
-See the original [PhantomKiller](https://github.com/redteamfortress/PhantomKiller) by j3h4ck.
+See the original [PhantomKiller](https://github.com/redteamfortress/PhantomKiller) and [AppRemover](https://github.com/redteamfortress/CVE-2026-36425) by j3h4ck. There is actually 16 AppRemover drivers, I added the first one, but you can swap it's file with any other ardrv from j3h4ck repo.
 
 I also didn't include the `ksapi64` and `wamsdk` driver to default features list, because it's been blocked by windows vulnerable driver block list.
 
