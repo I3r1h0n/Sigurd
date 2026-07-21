@@ -1,6 +1,6 @@
 [package]
 name = "sigurd"
-version = "0.1.4"
+version = "0.1.5"
 edition = "2024"
 authors = ["I3r1h0n"]
 description = "BYOVD technique abuse tool"
