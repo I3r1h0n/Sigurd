@@ -16,6 +16,8 @@ pub mod gamedriverx64;
 pub mod stprocessmonitor;
 #[cfg(feature = "phantom")]
 pub mod phantom;
+#[cfg(feature = "libwasys")]
+pub mod libwasys;
 #[cfg(feature = "poisonx")]
 pub mod poisonx;
 #[cfg(feature = "ccprotect")]
@@ -121,6 +123,15 @@ pub fn get_drivers() -> Result<Vec<Box<dyn KillerDriver>>, SigurdError> {
 
         let gamedriverx64 = GameDriverX64::new()?;
         driver_options.push(gamedriverx64);
+    }
+
+    // Libwasys by OPSWAT
+    #[cfg(feature = "libwasys")]
+    {
+        use crate::drivers::libwasys::Libwasys;
+
+        let libwasys = Libwasys::new()?;
+        driver_options.push(libwasys);
     }
 
     // Phantom Killer

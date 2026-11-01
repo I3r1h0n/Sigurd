@@ -7,7 +7,7 @@
 
 <div align="center">
 <img alt="Rust" src="https://img.shields.io/badge/rust-f04041?style=for-the-badge&labelColor=c0282d&logo=rust">
-<img alt="Version" src="https://img.shields.io/badge/version-v0.1.5-green?style=for-the-badge">
+<img alt="Version" src="https://img.shields.io/badge/version-v0.1.6-green?style=for-the-badge">
 <img alt="Lic" src="https://img.shields.io/github/license/I3r1h0n/Sigurd?label=license&style=for-the-badge">
 </div>
 </div>
@@ -104,6 +104,7 @@ Table of the currently implemented drivers.
 
 |Driver|Version|CVE|Details|Status|
 |------|-------|--------|-------|------|
+|Libwasys|10.3.2951.0|-|[Github](https://github.com/redteamfortress/KillerLand/tree/main/1.%20Libwasys)| On LoL |
 |PhantomKiller|2.5.30.11281|-|[Article](https://medium.com/@jehadbudagga/phantom-killer-reverse-engineering-and-weaponizing-a-lenovo-driver-to-terminate-edr-processes-9191cd06374f)| Not on LoL |
 |AppRemover Driver|v2017.10.02.1551|[CVE-2026-36425](https://www.cve.org/CVERecord?id=CVE-2026-36425)|[Github](https://github.com/redteamfortress/CVE-2026-36425)|Not on LoL|
 |PoisonX|0.0.1|-|[Discoverer](https://medium.com/@jehadbudagga/reverse-engineering-a-0day-used-against-crowdstrike-edr-a5ea1fbe3fd4)|Not on LoL|
@@ -122,7 +123,7 @@ Table of the currently implemented drivers.
 
 You can find all driver files in `sigurd/drivers` folder.
 
-See the original [PhantomKiller](https://github.com/redteamfortress/PhantomKiller) and [AppRemover](https://github.com/redteamfortress/CVE-2026-36425) by j3h4ck. There is actually 16 AppRemover drivers, I added the first one, but you can swap it's file with any other ardrv from j3h4ck repo.
+See the original [Libwasys](https://github.com/redteamfortress/KillerLand/tree/main/1.%20Libwasys), [PhantomKiller](https://github.com/redteamfortress/PhantomKiller) and [AppRemover](https://github.com/redteamfortress/CVE-2026-36425) by j3h4ck. There is actually 16 AppRemover drivers, I added the first one, but you can swap it's file with any other ardrv from j3h4ck repo.
 
 I also didn't include the `ksapi64` and `wamsdk` driver to default features list, because it's been blocked by windows vulnerable driver block list.
 
